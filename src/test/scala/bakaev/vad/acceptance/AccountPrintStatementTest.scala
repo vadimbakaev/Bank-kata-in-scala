@@ -12,7 +12,8 @@ class AccountPrintStatementTest extends FlatSpec with Matchers with MockitoSugar
   "An account" should "print statement correctly" in {
 
     val printStream = mock[PrintStream]
-    val account = mock[Account]
+
+    val account = new Account()
 
     account.deposit(Amount.of(1000), OperationDate.of("10-01-2012"))
     account.deposit(Amount.of(2000), OperationDate.of("13-01-2012"))
