@@ -3,17 +3,19 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
+import bakaev.vad.Amount.PositiveAmount
+
 class TransactionStorage(private val stateLines: Seq[Transaction]) {
   require(stateLines != null)
 
   private lazy val chainOfStates =
     stateLines.sorted.indices.map(index => stateLines(index).toState(stateLines.take(index))).reverse
 
-  def deposit(amount: Amount, date: LocalDate): TransactionStorage =
-    TransactionStorage(stateLines :+ new Transaction(amount, date))
+  def deposit(amount: PositiveAmount, date: LocalDate): TransactionStorage =
+    TransactionStorage(stateLines :+ Transaction(amount, date))
 
-  def withdraw(amount: Amount, date: LocalDate): TransactionStorage =
-    TransactionStorage(stateLines :+ new Transaction(-amount, date))
+  def withdraw(amount: PositiveAmount, date: LocalDate): TransactionStorage =
+    TransactionStorage(stateLines :+ Transaction(-amount, date))
 
   def printStatements(printer: StatePrinter): Unit = printer.print(chainOfStates)
 

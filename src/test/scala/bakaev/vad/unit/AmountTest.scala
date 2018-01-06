@@ -49,10 +49,4 @@ class AmountTest extends FlatSpec with Matchers with MockitoSugar {
 
   }
 
-  it should "return true in it's less than 0" in {
-    val result =  Amount(-1)
-
-    result.isNegative should equal(true)
-  }
-
 }

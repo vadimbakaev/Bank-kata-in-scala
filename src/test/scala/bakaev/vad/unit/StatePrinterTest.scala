@@ -3,6 +3,7 @@ package bakaev.vad.unit
 import java.io.PrintStream
 import java.time.LocalDate
 
+import bakaev.vad.Amount.PositiveAmount
 import bakaev.vad._
 import org.mockito.Mockito
 import org.mockito.Mockito._
@@ -43,7 +44,7 @@ class StatePrinterTest extends FlatSpec with Matchers with MockitoSugar {
     val printStream = mock[PrintStream]
     val printer = new StatePrinter(printStream)
 
-    printer.printLine(LocalDate.of(2012, 1, 10), new Amount(1000), new Amount(1000))
+    printer.printLine(LocalDate.of(2012, 1, 10), new PositiveAmount(1000), Amount(1000))
 
     verify(printStream).println("10/01/2012 || 1000.00  ||          || 1000.00")
   }
