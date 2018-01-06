@@ -2,6 +2,8 @@ package bakaev.vad
 
 import java.util.Objects
 
+import bakaev.vad.Amount.{NegativeAmount, PositiveAmount}
+
 sealed trait Amount {
 
   protected val value: Int
@@ -23,24 +25,36 @@ sealed trait Amount {
   override def hashCode: Int = Objects.hashCode(value)
 }
 
+trait NotZeroAmount extends Amount
+
+object NotZeroAmount {
+  def apply(value: Int): NotZeroAmount = value match {
+    case positive if positive > 0 => new PositiveAmount(positive)
+    case negative if negative < 0 => new NegativeAmount(negative)
+    case _ =>
+      throw new IllegalArgumentException("requirement failed: NotZeroAmount can't be zero")
+  }
+}
+
 object Amount {
 
   def apply(value: Int): Amount = value match {
-    case positive if positive > 0 => new PositiveAmount(value)
-    case 0                        => ZeroAmount
-    case negative                 => new NegativeAmount(negative)
-  }
-
-  class PositiveAmount(override protected val value: Int) extends Amount {
-    require(value > 0)
-  }
-
-  class NegativeAmount(override protected val value: Int) extends Amount {
-    require(value < 0)
+    case 0             => ZeroAmount
+    case notZeroAmount => NotZeroAmount(notZeroAmount)
   }
 
   object ZeroAmount extends Amount {
     override protected val value: Int = 0
+  }
+
+  class PositiveAmount(override protected val value: Int) extends NotZeroAmount {
+    require(value > 0)
+    override def unary_- : NegativeAmount = new NegativeAmount(-value)
+  }
+
+  class NegativeAmount(override protected val value: Int) extends NotZeroAmount {
+    require(value < 0)
+    override def unary_- : PositiveAmount = new PositiveAmount(-value)
   }
 
 }
