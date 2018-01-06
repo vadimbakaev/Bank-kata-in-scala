@@ -3,19 +3,19 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
-class Account(private val sate: AccountState, private val statePrinter: StatePrinter = new StatePrinter()) {
+class Account(private val sate: AccountState, private val transactionPrinter: TransactionPrinter = new TransactionPrinter(System.out)) {
 
-  def printStatement(): Unit = sate.printStatement(statePrinter)
+  def printStatement(): Unit = sate.printStatement(transactionPrinter)
 
-  def deposit(amount: Amount, date: LocalDate): Account = new Account(sate.deposit(amount, date), statePrinter)
+  def deposit(amount: Amount, date: LocalDate): Account = new Account(sate.deposit(amount, date), transactionPrinter)
 
-  def withdraw(amount: Amount, date: LocalDate): Account = new Account(sate.withdraw(amount, date), statePrinter)
+  def withdraw(amount: Amount, date: LocalDate): Account = new Account(sate.withdraw(amount, date), transactionPrinter)
 
   override def equals(obj: scala.Any): Boolean =
     obj match {
-      case that: Account => sate == that.sate && statePrinter == that.statePrinter
+      case that: Account => sate == that.sate && transactionPrinter == that.transactionPrinter
       case _             => false
     }
 
-  override def hashCode: Int = Objects.hash(sate, statePrinter)
+  override def hashCode: Int = Objects.hash(sate, transactionPrinter)
 }

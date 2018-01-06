@@ -8,6 +8,6 @@ class AccountState {
 
   def withdraw(amount: Amount, date: LocalDate): AccountState = ???
 
-  def printStatement(printer: StatePrinter): Unit = ???
+  def printStatement(printer: TransactionPrinter): Unit = ???
 
 }

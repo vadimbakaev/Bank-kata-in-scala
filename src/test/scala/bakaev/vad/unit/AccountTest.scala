@@ -2,7 +2,7 @@ package bakaev.vad.unit
 
 import java.time.LocalDate
 
-import bakaev.vad.{Account, AccountState, Amount, StatePrinter}
+import bakaev.vad.{Account, AccountState, Amount, TransactionPrinter}
 import org.mockito.Mockito
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
@@ -47,7 +47,7 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
 
   it should "print statement" in {
     val state = mock[AccountState]
-    val statePrinter = mock[StatePrinter]
+    val statePrinter = mock[TransactionPrinter]
 
     val account = new Account(state, statePrinter)
 
