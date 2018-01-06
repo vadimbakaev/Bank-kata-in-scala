@@ -3,7 +3,7 @@ package bakaev.vad.acceptance
 import java.io.PrintStream
 import java.time.LocalDate
 
-import bakaev.vad.{Account, Amount}
+import bakaev.vad.{Account, AccountState, Amount}
 import org.mockito.Mockito
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
@@ -14,11 +14,10 @@ class AccountPrintStatementTest extends FlatSpec with Matchers with MockitoSugar
 
     val printStream = mock[PrintStream]
 
-    val account = new Account()
-
-    account.deposit(new Amount(1000), LocalDate.of(2012,1,10))
-    account.deposit(new Amount(2000), LocalDate.of(2012,1,13))
-    account.withdrawal(new Amount(500), LocalDate.of(2012,1,14))
+    val account = new Account(new AccountState())
+      .deposit(new Amount(1000), LocalDate.of(2012, 1, 10))
+      .deposit(new Amount(2000), LocalDate.of(2012, 1, 13))
+      .withdraw(new Amount(500), LocalDate.of(2012, 1, 14))
 
     account.printStatement()
 
