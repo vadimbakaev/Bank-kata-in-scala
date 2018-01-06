@@ -3,7 +3,8 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
-class Account(private val sate: AccountState, private val transactionPrinter: TransactionPrinter = new TransactionPrinter(System.out)) {
+class Account(private val sate: AccountState,
+              private val transactionPrinter: TransactionPrinter = new TransactionPrinter(System.out)) {
 
   def printStatement(): Unit = sate.printStatement(transactionPrinter)
 

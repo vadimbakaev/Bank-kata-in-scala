@@ -4,7 +4,7 @@ import java.io.PrintStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter._
 
-import bakaev.vad.TransactionPrinter.Header
+import bakaev.vad.TransactionPrinter._
 
 class TransactionPrinter(private val printStream: PrintStream) {
 
@@ -16,12 +16,16 @@ class TransactionPrinter(private val printStream: PrintStream) {
   }
 
   def printLine(date: LocalDate, operation: Amount, balance: Amount): Unit = {
-    val dateString = date.format(ofPattern("dd/MM/uuuu"))
+    val dateString = date.format(ofPattern(DatePattern))
 
     if (operation.isNegative) {
-      printStream.println(s"$dateString ||          || ${(-operation).moneyRepresentation.padTo(9, " ").mkString}|| ${balance.moneyRepresentation}")
+      printStream.println(
+        s"$dateString ||          || ${(-operation).moneyRepresentation.padTo(9, " ").mkString}|| ${balance.moneyRepresentation}"
+      )
     } else {
-      printStream.println(s"$dateString || ${operation.moneyRepresentation.padTo(9, " ").mkString}||          || ${balance.moneyRepresentation}")
+      printStream.println(
+        s"$dateString || ${operation.moneyRepresentation.padTo(9, " ").mkString}||          || ${balance.moneyRepresentation}"
+      )
     }
 
   }
@@ -29,5 +33,6 @@ class TransactionPrinter(private val printStream: PrintStream) {
 }
 
 object TransactionPrinter {
-  val Header: String = "date       || credit   || debit    || balance"
+  val Header: String      = "date       || credit   || debit    || balance"
+  val DatePattern: String = "dd/MM/uuuu"
 }
