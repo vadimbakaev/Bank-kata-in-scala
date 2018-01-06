@@ -8,7 +8,7 @@ import bakaev.vad.Amount.{NegativeAmount, PositiveAmount, ZeroAmount}
 sealed trait Transaction extends Ordered[Transaction] {
 
   protected val value: Amount
-  protected val date: LocalDate
+  protected val date : LocalDate
 
   def toState(previousTransactions: Seq[Transaction]): State
 
@@ -26,9 +26,9 @@ sealed trait Transaction extends Ordered[Transaction] {
 object Transaction {
 
   def apply(value: Amount, date: LocalDate): Transaction = value match {
-    case _: ZeroAmount     => throw new IllegalArgumentException("requirement failed: transaction can't be zero")
     case _: PositiveAmount => new Credit(value, date)
     case _: NegativeAmount => new Debit(value, date)
+    case ZeroAmount        => throw new IllegalArgumentException("requirement failed: transaction can't be zero")
   }
 
   class Debit(override protected val value: Amount, override protected val date: LocalDate) extends Transaction {

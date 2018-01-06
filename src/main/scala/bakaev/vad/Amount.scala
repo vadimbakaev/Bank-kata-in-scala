@@ -27,11 +27,9 @@ object Amount {
 
   def apply(value: Int): Amount = value match {
     case positive if positive > 0 => new PositiveAmount(value)
-    case 0                        => new ZeroAmount(0)
+    case 0                        => ZeroAmount
     case negative                 => new NegativeAmount(negative)
   }
-
-  val ZeroAmount: Amount = this(0)
 
   class PositiveAmount(override protected val value: Int) extends Amount {
     require(value > 0)
@@ -41,8 +39,8 @@ object Amount {
     require(value < 0)
   }
 
-  class ZeroAmount(override protected val value: Int) extends Amount {
-    require(value == 0)
+  object ZeroAmount extends Amount {
+    override protected val value: Int = 0
   }
 
 }

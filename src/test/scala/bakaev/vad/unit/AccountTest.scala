@@ -38,7 +38,7 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
 
     account.withdraw(new PositiveAmount(1000), LocalDate.MIN)
 
-    Mockito.verify(state).withdraw(Amount(1000), LocalDate.MIN)
+    Mockito.verify(state).withdraw(new PositiveAmount(1000), LocalDate.MIN)
   }
 
   it should "store withdraw on state and return new account" in {

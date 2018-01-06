@@ -9,7 +9,7 @@ class State(
     private val operation: Amount,
     private val balance: Amount
 ) {
-  require(!operation.isInstanceOf[ZeroAmount])
+  require(operation != ZeroAmount)
 
   def printOn(printer: StatePrinter): Unit = operation match {
     case positive: PositiveAmount => printer.printLine(localDate, positive, balance)
