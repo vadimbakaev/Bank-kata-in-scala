@@ -4,13 +4,13 @@ import java.io.PrintStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter._
 
-import bakaev.vad.TransactionPrinter._
+import bakaev.vad.StatePrinter._
 
-class TransactionPrinter(private val printStream: PrintStream) {
+class StatePrinter(private val printStream: PrintStream) {
 
-  def print(transactions: Seq[Transaction]): Unit = {
+  def print(states: Seq[State]): Unit = {
     printStream.println(Header)
-    transactions.foreach {
+    states.foreach {
       _.printOn(this)
     }
   }
@@ -32,7 +32,7 @@ class TransactionPrinter(private val printStream: PrintStream) {
 
 }
 
-object TransactionPrinter {
+object StatePrinter {
   val Header: String      = "date       || credit   || debit    || balance"
   val DatePattern: String = "dd/MM/uuuu"
 }

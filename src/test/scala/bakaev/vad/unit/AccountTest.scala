@@ -2,7 +2,7 @@ package bakaev.vad.unit
 
 import java.time.LocalDate
 
-import bakaev.vad.{Account, AccountState, Amount, TransactionPrinter}
+import bakaev.vad.{Account, TransactionStorage, Amount, StatePrinter}
 import org.mockito.Mockito
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
@@ -10,7 +10,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class AccountTest extends FlatSpec with Matchers with MockitoSugar {
 
   "An account" should "store deposit on state" in {
-    val state = mock[AccountState]
+    val state = mock[TransactionStorage]
 
     val account = new Account(state)
 
@@ -20,7 +20,7 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
   }
 
   it should "store deposit on state and return new account" in {
-    val state = mock[AccountState]
+    val state = mock[TransactionStorage]
 
     val account = new Account(state)
 
@@ -28,7 +28,7 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
   }
 
   it should "store withdraw on state" in {
-    val state = mock[AccountState]
+    val state = mock[TransactionStorage]
 
     val account = new Account(state)
 
@@ -38,7 +38,7 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
   }
 
   it should "store withdraw on state and return new account" in {
-    val state = mock[AccountState]
+    val state = mock[TransactionStorage]
 
     val account = new Account(state)
 
@@ -46,14 +46,14 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
   }
 
   it should "print statement" in {
-    val state = mock[AccountState]
-    val statePrinter = mock[TransactionPrinter]
+    val state = mock[TransactionStorage]
+    val statePrinter = mock[StatePrinter]
 
     val account = new Account(state, statePrinter)
 
     account.printStatement()
 
-    Mockito.verify(state).printStatement(statePrinter)
+    Mockito.verify(state).printStatements(statePrinter)
   }
 
 }

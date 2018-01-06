@@ -1,5 +1,7 @@
 package bakaev.vad
 
+import java.util.Objects
+
 class Amount(private val value: Int) {
 
   def isNegative: Boolean = value < 0
@@ -16,9 +18,11 @@ class Amount(private val value: Int) {
       case _            => false
     }
 
-  override def hashCode: Int = value.hashCode()
+  override def hashCode: Int = Objects.hashCode(value)
 }
 
 object Amount {
   def apply(value: Int): Amount = new Amount(value)
+
+  val ZeroAmount: Amount = this(0)
 }
