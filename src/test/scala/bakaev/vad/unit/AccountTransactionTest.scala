@@ -10,7 +10,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
 
   "An TransactionStorage" should "return new account on deposit" in {
-    val state = new TransactionStorage(Nil)
+    val state = TransactionStorage()
 
     val newState = state.deposit(Amount(10), LocalDate.MIN)
 
@@ -19,6 +19,8 @@ class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
 
   it should "return new account Transaction with new Transaction on deposit" in {
     val seq = mock[Seq[Transaction]]
+
+    when(seq :+ new Transaction(Amount(10), LocalDate.MIN)).thenReturn(Seq(new Transaction(Amount(10), LocalDate.MIN)))
 
     val state = new TransactionStorage(seq)
 
@@ -30,7 +32,7 @@ class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
   }
 
   it should "return new account on withdraw" in {
-    val state = new TransactionStorage(Nil)
+    val state = TransactionStorage(Nil)
 
     val newState = state.withdraw(Amount(10), LocalDate.MIN)
 
@@ -39,8 +41,9 @@ class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
 
   it should "return new account TransactionStorage with new Transaction and negative Amount on withdraw" in {
     val seq = mock[Seq[Transaction]]
+    when(seq :+ new Transaction(Amount(-1000), LocalDate.MIN)).thenReturn(Seq(new Transaction(Amount(-1000), LocalDate.MIN)))
 
-    val state = new TransactionStorage(seq)
+    val state = TransactionStorage(seq)
 
     val newState = state.withdraw(Amount(1000), LocalDate.MIN)
 
@@ -52,7 +55,7 @@ class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
   it should "invoke printer with sorted transaction list on printStatement" in {
     val seq = Seq()
 
-    val state = new TransactionStorage(seq)
+    val state = TransactionStorage(seq)
 
 //    state.printStatements()
   }

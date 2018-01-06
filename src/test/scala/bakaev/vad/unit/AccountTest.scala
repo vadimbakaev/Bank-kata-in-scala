@@ -11,8 +11,9 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
 
   "An account" should "store deposit on state" in {
     val state = mock[TransactionStorage]
+    val statePrinter = mock[StatePrinter]
 
-    val account = new Account(state)
+    val account = new Account(state, statePrinter)
 
     account.deposit(new Amount(1000), LocalDate.MIN) should not equal account
 
@@ -21,16 +22,18 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
 
   it should "store deposit on state and return new account" in {
     val state = mock[TransactionStorage]
+    val statePrinter = mock[StatePrinter]
 
-    val account = new Account(state)
+    val account = new Account(state, statePrinter)
 
     account.deposit(new Amount(1000), LocalDate.MIN) should not equal account
   }
 
   it should "store withdraw on state" in {
     val state = mock[TransactionStorage]
+    val statePrinter = mock[StatePrinter]
 
-    val account = new Account(state)
+    val account = new Account(state, statePrinter)
 
     account.withdraw(new Amount(1000), LocalDate.MIN)
 
@@ -39,8 +42,9 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
 
   it should "store withdraw on state and return new account" in {
     val state = mock[TransactionStorage]
+    val statePrinter = mock[StatePrinter]
 
-    val account = new Account(state)
+    val account = new Account(state, statePrinter)
 
     account.withdraw(new Amount(1000), LocalDate.MIN) should not equal account
   }

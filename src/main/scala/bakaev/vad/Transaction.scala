@@ -5,8 +5,8 @@ import java.util.Objects
 
 class Transaction(private val operation: Amount, private val date: LocalDate) extends Ordered[Transaction] {
 
-  def toState(previous: Seq[Transaction]): State =
-    new State(date, operation, previous.map(_.operation).fold(operation)(_ + _))
+  def toState(previousTransactions: Seq[Transaction]): State =
+    new State(date, operation, previousTransactions.map(_.operation).fold(operation)(_ + _))
 
   override def compare(that: Transaction): Int = date.compareTo(that.date)
 
