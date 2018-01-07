@@ -69,4 +69,8 @@ class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
     verify(seq) :+ Transaction(NotZeroAmount(-1000), LocalDate.MIN)
   }
 
+  it should "printStatement filtered by date and type" in {
+
+  }
+
 }

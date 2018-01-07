@@ -18,7 +18,8 @@ class TransactionStorage private (private val sortedTransactions: Seq[Transactio
   def withdraw(amount: PositiveAmount, date: LocalDate): TransactionStorage =
     TransactionStorage(sortedTransactions :+ Transaction(-amount, date))
 
-  def printStatements(printer: StatePrinter): Unit = printer print chainOfStates
+  def printStatements(from: LocalDate, to: LocalDate, printer: StatePrinter): Unit =
+    printer.print(from, to, chainOfStates)
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: TransactionStorage => sortedTransactions == that.sortedTransactions

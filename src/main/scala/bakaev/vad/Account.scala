@@ -29,7 +29,8 @@ class Account(private val transactionStorage: TransactionStorage, private val st
     (this.withdraw(amount, date), receiver.deposit(amount, date))
   }
 
-  def printStatement(): Unit = transactionStorage.printStatements(statePrinter)
+  def printStatement(from: LocalDate = LocalDate.MIN, to: LocalDate = LocalDate.MAX): Unit =
+    transactionStorage.printStatements(from, to, statePrinter)
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: Account => transactionStorage == that.transactionStorage && statePrinter == that.statePrinter

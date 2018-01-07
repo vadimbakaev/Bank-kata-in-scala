@@ -98,15 +98,17 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
     } should have message "requirement failed: Receiver cannot be sender in transfer"
   }
 
-  it should "print statement" in {
+  it should "printStatement between two dates" in {
     val state = mock[TransactionStorage]
     val statePrinter = mock[StatePrinter]
 
     val account = new Account(state, statePrinter)
+    val from = LocalDate.MIN
+    val to = LocalDate.MAX
 
-    account.printStatement()
+    account.printStatement(from, to)
 
-    verify(state).printStatements(statePrinter)
+    verify(state).printStatements(from, to, statePrinter)
   }
 
 }

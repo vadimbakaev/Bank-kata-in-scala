@@ -16,7 +16,10 @@ class StatePrinterTest extends FlatSpec with Matchers with MockitoSugar {
     val printStream = mock[PrintStream]
     val printer = new StatePrinter(printStream)
 
-    printer.print(Nil)
+    val from = LocalDate.MIN
+    val to = LocalDate.MAX
+
+    printer.print(from, to, Nil)
 
     verify(printStream).println("date       || credit   || debit    || balance")
   }
@@ -31,13 +34,16 @@ class StatePrinterTest extends FlatSpec with Matchers with MockitoSugar {
 
     val states = Seq(state1, state2, state3)
 
-    printer.print(states)
+    val from = LocalDate.MIN
+    val to = LocalDate.MAX
+
+    printer.print(from, to, states)
 
     val orderVerifier = Mockito.inOrder(state1, state2, state3)
 
-    orderVerifier.verify(state1).printOn(printer)
-    orderVerifier.verify(state2).printOn(printer)
-    orderVerifier.verify(state3).printOn(printer)
+    orderVerifier.verify(state1).printMatchedOn(from, to, printer)
+    orderVerifier.verify(state2).printMatchedOn(from, to, printer)
+    orderVerifier.verify(state3).printMatchedOn(from, to, printer)
   }
 
   it should "print state line" in {

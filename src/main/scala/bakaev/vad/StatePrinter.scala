@@ -10,9 +10,9 @@ import bakaev.vad.StatePrinter._
 
 class StatePrinter(private val printStream: PrintStream) {
 
-  def print(states: Seq[State]): Unit = {
+  def print(from: LocalDate, to: LocalDate, states: Seq[State]): Unit = {
     printStream println Header
-    states foreach (state => state printOn this)
+    states foreach (state => state printMatchedOn (from, to, this))
   }
 
   def printLine(date: LocalDate, debit: NegativeAmount, balance: Amount): Unit =

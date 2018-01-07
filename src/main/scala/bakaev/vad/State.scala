@@ -6,26 +6,31 @@ import java.util.Objects
 import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
 
 trait State {
-  def printOn(printer: StatePrinter): Unit
+  def printMatchedOn(from: LocalDate, to: LocalDate, printer: StatePrinter): Unit
 }
 
 object State {
   def apply(localDate: LocalDate, operation: NotZeroAmount, balance: Amount): State =
     new StateImpl(localDate, operation, balance)
 
-  class StateImpl(private val localDate: LocalDate, private val operation: NotZeroAmount, private val balance: Amount)
+  class StateImpl(private val operationDate: LocalDate,
+                  private val operation: NotZeroAmount,
+                  private val balance: Amount)
       extends State {
-    def printOn(printer: StatePrinter): Unit = operation match {
-      case positive: PositiveAmount => printer printLine (localDate, positive, balance)
-      case negative: NegativeAmount => printer printLine (localDate, negative, balance)
-    }
+    def printMatchedOn(from: LocalDate, to: LocalDate, printer: StatePrinter): Unit =
+      if (operationDate.isAfter(from) && operationDate.isBefore(to)) {
+        operation match {
+          case positive: PositiveAmount => printer printLine (operationDate, positive, balance)
+          case negative: NegativeAmount => printer printLine (operationDate, negative, balance)
+        }
+      }
 
     override def equals(obj: scala.Any): Boolean = obj match {
-      case that: StateImpl => localDate == that.localDate && operation == that.operation
+      case that: StateImpl => operationDate == that.operationDate && operation == that.operation
       case _               => false
     }
 
-    override def hashCode: Int = Objects.hashCode(localDate, operation)
+    override def hashCode: Int = Objects.hashCode(operationDate, operation)
   }
 
 }
