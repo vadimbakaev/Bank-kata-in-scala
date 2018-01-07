@@ -30,8 +30,12 @@ class Account(private val transactionStorage: TransactionStorage, private val st
     (this.withdraw(amount, date), receiver.deposit(amount, date))
   }
 
-  def printStatement(from: LocalDate = LocalDate.MIN, to: LocalDate = LocalDate.MAX, toPrint: Operation = ALL): Unit =
+  def printStatement(from: LocalDate = LocalDate.MIN, to: LocalDate = LocalDate.MAX, toPrint: Operation = ALL): Unit = {
+    require(from != null, "From cannot be null in printStatement")
+    require(to != null, "To cannot be null in printStatement")
+    require(toPrint != null, "ToPrint cannot be null in printStatement")
     transactionStorage.printStatements(from, to, toPrint, statePrinter)
+  }
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: Account => transactionStorage == that.transactionStorage && statePrinter == that.statePrinter
