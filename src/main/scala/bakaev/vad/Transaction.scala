@@ -1,6 +1,7 @@
 package bakaev.vad
 
 import java.time.LocalDate
+import java.util.Objects
 
 import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
 
@@ -10,7 +11,7 @@ sealed trait Transaction extends Ordered[Transaction] {
   protected val date: LocalDate
 
   def toState(previousTransactions: Seq[Transaction]): State =
-    new State(date, value, previousTransactions.map(_.value).fold(value: Amount)(_ + _))
+    new State(date, value, previousTransactions.map(transaction => transaction.value).fold(value: Amount)(_ + _))
 
   override def compare(that: Transaction): Int = date.compareTo(that.date)
 
@@ -19,7 +20,7 @@ sealed trait Transaction extends Ordered[Transaction] {
     case _                 => false
   }
 
-  override def hashCode: Int = java.util.Objects.hashCode(date, value)
+  override def hashCode: Int = Objects.hashCode(date, value)
 }
 
 object Transaction {

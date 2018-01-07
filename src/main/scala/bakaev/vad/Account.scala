@@ -1,6 +1,7 @@
 package bakaev.vad
 
 import java.time.LocalDate
+import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
 
@@ -14,11 +15,10 @@ class Account(private val sate: TransactionStorage, private val statePrinter: St
   def withdraw(amount: PositiveAmount, date: LocalDate): Account =
     new Account(sate.withdraw(amount, date), statePrinter)
 
-  override def equals(obj: scala.Any): Boolean =
-    obj match {
-      case that: Account => sate == that.sate && statePrinter == that.statePrinter
-      case _             => false
-    }
+  override def equals(obj: scala.Any): Boolean = obj match {
+    case that: Account => sate == that.sate && statePrinter == that.statePrinter
+    case _             => false
+  }
 
-  override def hashCode: Int = java.util.Objects.hashCode(sate, statePrinter)
+  override def hashCode: Int = Objects.hashCode(sate, statePrinter)
 }

@@ -1,9 +1,11 @@
 package bakaev.vad
 
+import java.util.Objects
+
 sealed trait Amount {
   protected val value: Int
 
-  def moneyAbsRepresentation: String = s"${Math.abs(value)}.00"
+  def moneyAbsoluteRepresentation: String = s"${Math.abs(value)}.00"
 
   def moneyRepresentation: String = s"$value.00"
 
@@ -16,7 +18,7 @@ sealed trait Amount {
     case _            => false
   }
 
-  override def hashCode: Int = java.util.Objects.hashCode(value)
+  override def hashCode: Int = Objects.hashCode(value)
 }
 
 object Amount {

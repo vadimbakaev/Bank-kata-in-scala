@@ -1,33 +1,33 @@
 package bakaev.vad
 
 import java.time.LocalDate
+import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
 
-class TransactionStorage(private val stateLines: Seq[Transaction]) {
-  require(stateLines != null)
+class TransactionStorage(private val transactions: Seq[Transaction]) {
+  require(transactions != null)
 
-  private lazy val chainOfStates =
-    stateLines.sorted.indices.map(index => stateLines(index).toState(stateLines.take(index))).reverse
+  private lazy val chainOfStates = transactions.sorted.indices
+    .map(index => transactions(index).toState(transactions.take(index)))
+    .reverse
 
   def deposit(amount: PositiveAmount, date: LocalDate): TransactionStorage =
-    TransactionStorage(stateLines :+ Transaction(amount, date))
+    TransactionStorage(transactions :+ Transaction(amount, date))
 
   def withdraw(amount: PositiveAmount, date: LocalDate): TransactionStorage =
-    TransactionStorage(stateLines :+ Transaction(-amount, date))
+    TransactionStorage(transactions :+ Transaction(-amount, date))
 
   def printStatements(printer: StatePrinter): Unit = printer.print(chainOfStates)
 
   override def equals(obj: scala.Any): Boolean = obj match {
-    case that: TransactionStorage => stateLines == that.stateLines
+    case that: TransactionStorage => transactions == that.transactions
     case _                        => false
   }
 
-  override def hashCode: Int = java.util.Objects.hashCode(stateLines)
+  override def hashCode: Int = Objects.hashCode(transactions)
 }
 
 object TransactionStorage {
-  def apply(): TransactionStorage = new TransactionStorage(Nil)
-
-  def apply(stateLines: Seq[Transaction]): TransactionStorage = new TransactionStorage(stateLines)
+  def apply(stateLines: Seq[Transaction] = Nil): TransactionStorage = new TransactionStorage(stateLines)
 }
