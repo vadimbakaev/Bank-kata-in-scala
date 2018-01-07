@@ -4,9 +4,10 @@ import java.time.LocalDate
 import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
+import bakaev.vad.enums.Operation.Operation
 
 class TransactionStorage private (private val sortedTransactions: Seq[Transaction]) {
-  require(sortedTransactions != null)
+  require(sortedTransactions != null, "SortedTransactions cannot be null in StateImpl")
 
   private lazy val chainOfStates = sortedTransactions.indices
     .map(index => sortedTransactions(index) toState (sortedTransactions take index))
@@ -18,8 +19,8 @@ class TransactionStorage private (private val sortedTransactions: Seq[Transactio
   def withdraw(amount: PositiveAmount, date: LocalDate): TransactionStorage =
     TransactionStorage(sortedTransactions :+ Transaction(-amount, date))
 
-  def printStatements(from: LocalDate, to: LocalDate, printer: StatePrinter): Unit =
-    printer.print(from, to, chainOfStates)
+  def printStatements(from: LocalDate, to: LocalDate, toPrint: Operation, printer: StatePrinter): Unit =
+    printer print (from, to, toPrint, chainOfStates)
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: TransactionStorage => sortedTransactions == that.sortedTransactions
@@ -30,5 +31,8 @@ class TransactionStorage private (private val sortedTransactions: Seq[Transactio
 }
 
 object TransactionStorage {
-  def apply(transactions: Seq[Transaction] = Nil): TransactionStorage = new TransactionStorage(transactions.sorted)
+  def apply(transactions: Seq[Transaction] = Nil): TransactionStorage = {
+    require(transactions != null, "Transactions cannot be null in TransactionStorage")
+    new TransactionStorage(transactions.sorted)
+  }
 }

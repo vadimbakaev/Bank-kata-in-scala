@@ -11,7 +11,7 @@ sealed trait Transaction extends Ordered[Transaction] {
   protected val date: LocalDate
 
   def toState(previousTransactions: Seq[Transaction]): State =
-    State(date, value, previousTransactions.map(transaction => transaction.value).fold(value: Amount)(_ + _))
+    State(date, value, (previousTransactions map (transaction => transaction.value)).fold(value: Amount)(_ + _))
 
   override def compare(that: Transaction): Int = date compareTo that.date
 

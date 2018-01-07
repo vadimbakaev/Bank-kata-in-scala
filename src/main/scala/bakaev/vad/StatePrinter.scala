@@ -7,12 +7,13 @@ import java.util.Objects
 
 import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
 import bakaev.vad.StatePrinter._
+import bakaev.vad.enums.Operation.Operation
 
 class StatePrinter(private val printStream: PrintStream) {
-
-  def print(from: LocalDate, to: LocalDate, states: Seq[State]): Unit = {
+  require(printStream != null, "PrintStream cannot be null in StatePrinter")
+  def print(from: LocalDate, to: LocalDate, toPrint: Operation, states: Seq[State]): Unit = {
     printStream println Header
-    states foreach (state => state printMatchedOn (from, to, this))
+    states foreach (state => state printMatchedOn (from, to, toPrint, this))
   }
 
   def printLine(date: LocalDate, debit: NegativeAmount, balance: Amount): Unit =

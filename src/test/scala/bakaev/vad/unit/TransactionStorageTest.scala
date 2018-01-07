@@ -2,6 +2,7 @@ package bakaev.vad.unit
 
 import java.time.LocalDate
 
+import bakaev.vad.enums.Operation.ALL
 import bakaev.vad.{StatePrinter, TransactionStorage}
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
@@ -16,11 +17,11 @@ class TransactionStorageTest extends FlatSpec with Matchers with MockitoSugar {
     val from = LocalDate.MIN
     val to = LocalDate.MAX
 
-    doNothing().when(printer).print(from, to, Nil)
+    doNothing().when(printer).print(from, to, ALL, Nil)
 
-    storage.printStatements(from, to, printer)
+    storage.printStatements(from, to, ALL, printer)
 
-    verify(printer).print(from , to, Nil)
+    verify(printer).print(from , to, ALL, Nil)
   }
 
 }

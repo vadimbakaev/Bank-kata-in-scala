@@ -4,6 +4,7 @@ import java.time.LocalDate
 
 import bakaev.vad.Amount.{NegativeAmount, PositiveAmount}
 import bakaev.vad.Transaction.{Credit, Debit}
+import bakaev.vad.enums.Operation.ALL
 import bakaev.vad.{Account, StatePrinter, TransactionStorage}
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
@@ -106,9 +107,9 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
     val from = LocalDate.MIN
     val to = LocalDate.MAX
 
-    account.printStatement(from, to)
+    account.printStatement(from, to, ALL)
 
-    verify(state).printStatements(from, to, statePrinter)
+    verify(state).printStatements(from, to, ALL, statePrinter)
   }
 
 }

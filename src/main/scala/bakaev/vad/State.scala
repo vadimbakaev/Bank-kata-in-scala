@@ -4,9 +4,10 @@ import java.time.LocalDate
 import java.util.Objects
 
 import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
+import bakaev.vad.enums.Operation._
 
 trait State {
-  def printMatchedOn(from: LocalDate, to: LocalDate, printer: StatePrinter): Unit
+  def printMatchedOn(from: LocalDate, to: LocalDate, toPrint: Operation, printer: StatePrinter): Unit
 }
 
 object State {
@@ -17,13 +18,18 @@ object State {
                   private val operation: NotZeroAmount,
                   private val balance: Amount)
       extends State {
-    def printMatchedOn(from: LocalDate, to: LocalDate, printer: StatePrinter): Unit =
-      if (operationDate.isAfter(from) && operationDate.isBefore(to)) {
-        operation match {
-          case positive: PositiveAmount => printer printLine (operationDate, positive, balance)
-          case negative: NegativeAmount => printer printLine (operationDate, negative, balance)
-        }
-      }
+    require(operationDate != null, "OperationDate cannot be null in StateImpl")
+    require(operation != null, "Operation cannot be null in StateImpl")
+    require(balance != null, "Balance cannot be null in StateImpl")
+    def printMatchedOn(from: LocalDate, to: LocalDate, toPrint: Operation, printer: StatePrinter): Unit =
+      if (operationDate.isAfter(from) && operationDate.isBefore(to)) printMatchedByOperationOn(printer, toPrint)
+
+    private def printMatchedByOperationOn(printer: StatePrinter, toPrint: Operation): Unit = operation match {
+      case positive: PositiveAmount =>
+        if (toPrint == ALL || toPrint == CREDIT) printer printLine (operationDate, positive, balance)
+      case negative: NegativeAmount =>
+        if (toPrint == ALL || toPrint == DEBIT) printer printLine (operationDate, negative, balance)
+    }
 
     override def equals(obj: scala.Any): Boolean = obj match {
       case that: StateImpl => operationDate == that.operationDate && operation == that.operation

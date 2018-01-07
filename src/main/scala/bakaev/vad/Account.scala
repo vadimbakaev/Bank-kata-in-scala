@@ -4,6 +4,7 @@ import java.time.LocalDate
 import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
+import bakaev.vad.enums.Operation.{ALL, Operation}
 
 class Account(private val transactionStorage: TransactionStorage, private val statePrinter: StatePrinter) {
   require(transactionStorage != null, "TransactionStorage cannot be null in Account")
@@ -29,8 +30,8 @@ class Account(private val transactionStorage: TransactionStorage, private val st
     (this.withdraw(amount, date), receiver.deposit(amount, date))
   }
 
-  def printStatement(from: LocalDate = LocalDate.MIN, to: LocalDate = LocalDate.MAX): Unit =
-    transactionStorage.printStatements(from, to, statePrinter)
+  def printStatement(from: LocalDate = LocalDate.MIN, to: LocalDate = LocalDate.MAX, toPrint: Operation = ALL): Unit =
+    transactionStorage.printStatements(from, to, toPrint, statePrinter)
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: Account => transactionStorage == that.transactionStorage && statePrinter == that.statePrinter
