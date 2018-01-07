@@ -17,8 +17,8 @@ class AccountPrintStatementTest extends FlatSpec with Matchers with MockitoSugar
 
     val account = new Account(TransactionStorage(), new StatePrinter(printStream))
       .deposit(new PositiveAmount(1000), LocalDate.of(2012, 1, 10))
-      .deposit(new PositiveAmount(2000), LocalDate.of(2012, 1, 13))
       .withdraw(new PositiveAmount(500), LocalDate.of(2012, 1, 14))
+      .deposit(new PositiveAmount(2000), LocalDate.of(2012, 1, 13))
 
     account.printStatement()
 

@@ -13,7 +13,7 @@ sealed trait Transaction extends Ordered[Transaction] {
   def toState(previousTransactions: Seq[Transaction]): State =
     new State(date, value, previousTransactions.map(transaction => transaction.value).fold(value: Amount)(_ + _))
 
-  override def compare(that: Transaction): Int = date.compareTo(that.date)
+  override def compare(that: Transaction): Int = date compareTo that.date
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: Transaction => date == that.date && value == that.value
