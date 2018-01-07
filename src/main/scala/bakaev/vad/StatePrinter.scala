@@ -2,7 +2,7 @@ package bakaev.vad
 
 import java.io.PrintStream
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter._
+import java.time.format.DateTimeFormatter
 
 import bakaev.vad.Amount.{NegativeAmount, PositiveAmount}
 import bakaev.vad.StatePrinter._
@@ -16,27 +16,23 @@ class StatePrinter(private val printStream: PrintStream) {
     }
   }
 
-  def printLine(date: LocalDate, debit: NegativeAmount, balance: Amount): Unit = {
-    val dateString = date.format(ofPattern(DatePattern))
-
-    val debitRepresentation = debit.moneyAbsRepresentation.padTo(9, " ").mkString
+  def printLine(date: LocalDate, debit: NegativeAmount, balance: Amount): Unit =
     printStream.println(
-      s"$dateString || $EmptyBlock|| $debitRepresentation|| ${balance.moneyRepresentation}"
+      s"${date.format(Formatter)} ||          || ${operationBlock(debit)}|| ${balance.moneyRepresentation}"
     )
-  }
 
-  def printLine(date: LocalDate, credit: PositiveAmount, balance: Amount): Unit = {
-    val dateString           = date.format(ofPattern(DatePattern))
-    val creditRepresentation = credit.moneyAbsRepresentation.padTo(9, " ").mkString
+  def printLine(date: LocalDate, credit: PositiveAmount, balance: Amount): Unit =
     printStream.println(
-      s"$dateString || $creditRepresentation|| $EmptyBlock|| ${balance.moneyRepresentation}"
+      s"${date.format(Formatter)} || ${operationBlock(credit)}||          || ${balance.moneyRepresentation}"
     )
-  }
+
+  private def operationBlock(creditOrDebit: NotZeroAmount) =
+    creditOrDebit.moneyAbsRepresentation.padTo(OperationBlockPadding, " ").mkString
 
 }
 
 object StatePrinter {
-  val Header: String      = "date       || credit   || debit    || balance"
-  val DatePattern: String = "dd/MM/uuuu"
-  val EmptyBlock: String  = "         "
+  val Header: String               = "date       || credit   || debit    || balance"
+  val Formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+  val OperationBlockPadding: Int   = 9
 }

@@ -31,8 +31,7 @@ object NotZeroAmount {
   def apply(value: Int): NotZeroAmount = value match {
     case positive if positive > 0 => new PositiveAmount(positive)
     case negative if negative < 0 => new NegativeAmount(negative)
-    case _ =>
-      throw new IllegalArgumentException("requirement failed: NotZeroAmount can't be zero")
+    case _                        => throw new IllegalArgumentException("requirement failed: NotZeroAmount can't be zero")
   }
 }
 
@@ -49,11 +48,13 @@ object Amount {
 
   class PositiveAmount(override protected val value: Int) extends NotZeroAmount {
     require(value > 0)
+
     override def unary_- : NegativeAmount = new NegativeAmount(-value)
   }
 
   class NegativeAmount(override protected val value: Int) extends NotZeroAmount {
     require(value < 0)
+
     override def unary_- : PositiveAmount = new PositiveAmount(-value)
   }
 
