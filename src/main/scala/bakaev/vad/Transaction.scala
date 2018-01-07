@@ -1,9 +1,8 @@
 package bakaev.vad
 
 import java.time.LocalDate
-import java.util.Objects
 
-import bakaev.vad.Amount.{NegativeAmount, PositiveAmount}
+import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
 
 sealed trait Transaction extends Ordered[Transaction] {
 
@@ -20,7 +19,7 @@ sealed trait Transaction extends Ordered[Transaction] {
       case _                 => false
     }
 
-  override def hashCode: Int = Objects.hashCode(date, value)
+  override def hashCode: Int = java.util.Objects.hashCode(date, value)
 }
 
 object Transaction {

@@ -1,7 +1,6 @@
 package bakaev.vad
 
 import java.time.LocalDate
-import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
 
@@ -21,5 +20,5 @@ class Account(private val sate: TransactionStorage, private val statePrinter: St
       case _             => false
     }
 
-  override def hashCode: Int = Objects.hash(sate, statePrinter)
+  override def hashCode: Int = java.util.Objects.hashCode(sate, statePrinter)
 }

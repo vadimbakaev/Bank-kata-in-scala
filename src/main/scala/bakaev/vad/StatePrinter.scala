@@ -4,7 +4,7 @@ import java.io.PrintStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-import bakaev.vad.Amount.{NegativeAmount, PositiveAmount}
+import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
 import bakaev.vad.StatePrinter._
 
 class StatePrinter(private val printStream: PrintStream) {

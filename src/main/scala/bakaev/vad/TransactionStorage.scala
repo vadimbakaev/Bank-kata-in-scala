@@ -1,7 +1,6 @@
 package bakaev.vad
 
 import java.time.LocalDate
-import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
 
@@ -25,7 +24,7 @@ class TransactionStorage(private val stateLines: Seq[Transaction]) {
       case _                        => false
     }
 
-  override def hashCode: Int = Objects.hashCode(stateLines)
+  override def hashCode: Int = java.util.Objects.hashCode(stateLines)
 }
 
 object TransactionStorage {

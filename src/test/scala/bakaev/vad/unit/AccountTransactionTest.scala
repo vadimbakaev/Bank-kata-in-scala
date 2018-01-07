@@ -2,8 +2,8 @@ package bakaev.vad.unit
 
 import java.time.LocalDate
 
-import bakaev.vad.Amount.PositiveAmount
-import bakaev.vad.{NotZeroAmount, Transaction, TransactionStorage}
+import bakaev.vad.Amount.{NotZeroAmount, PositiveAmount}
+import bakaev.vad.{Transaction, TransactionStorage}
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
