@@ -18,11 +18,10 @@ class TransactionStorage(private val stateLines: Seq[Transaction]) {
 
   def printStatements(printer: StatePrinter): Unit = printer.print(chainOfStates)
 
-  override def equals(obj: scala.Any): Boolean =
-    obj match {
-      case that: TransactionStorage => stateLines == that.stateLines
-      case _                        => false
-    }
+  override def equals(obj: scala.Any): Boolean = obj match {
+    case that: TransactionStorage => stateLines == that.stateLines
+    case _                        => false
+  }
 
   override def hashCode: Int = java.util.Objects.hashCode(stateLines)
 }
