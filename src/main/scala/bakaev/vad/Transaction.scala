@@ -3,8 +3,6 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
-import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
-
 sealed trait Transaction extends Ordered[Transaction] {
 
   protected val value: NotZeroAmount

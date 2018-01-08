@@ -3,8 +3,6 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
-import bakaev.vad.Amount.PositiveAmount
-
 class Account(private val transactionStorage: TransactionStorage, private val statePrinter: StatePrinter) {
   require(transactionStorage != null, "TransactionStorage cannot be null in Account")
   require(statePrinter != null, "StatePrinter cannot be null in Account")

@@ -3,7 +3,6 @@ package bakaev.vad.acceptance
 import java.io.PrintStream
 import java.time.LocalDate
 
-import bakaev.vad.Amount.PositiveAmount
 import bakaev.vad.{BaseSpec, _}
 import org.mockito.Mockito
 

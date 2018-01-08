@@ -1,9 +1,6 @@
 package bakaev.vad.unit
 
-import bakaev.vad.{Amount, BaseSpec}
-import bakaev.vad.Amount.{NotZeroAmount, ZeroAmount}
-import org.scalatest.mockito.MockitoSugar
-import org.scalatest.{FlatSpec, Matchers}
+import bakaev.vad.{Amount, BaseSpec, NotZeroAmount, ZeroAmount}
 
 class AmountTest extends BaseSpec {
 

@@ -2,12 +2,9 @@ package bakaev.vad.unit
 
 import java.time.LocalDate
 
-import bakaev.vad.Amount.{NotZeroAmount, PositiveAmount}
-import bakaev.vad.{BaseSpec, Transaction, TransactionStorage}
+import bakaev.vad._
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito._
-import org.scalatest.mockito.MockitoSugar
-import org.scalatest.{FlatSpec, Matchers}
 
 class AccountTransactionTest extends BaseSpec {
 

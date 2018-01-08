@@ -3,7 +3,6 @@ package bakaev.vad.unit
 import java.io.PrintStream
 import java.time.LocalDate
 
-import bakaev.vad.Amount.PositiveAmount
 import bakaev.vad._
 import org.mockito.Mockito
 import org.mockito.Mockito._

@@ -3,8 +3,6 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
-import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
-
 trait State {
   def printMatchedOn(from: LocalDate, to: LocalDate, toPrint: Operation, printer: StatePrinter): Unit
 }
