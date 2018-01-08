@@ -4,7 +4,6 @@ import java.time.LocalDate
 import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
-import bakaev.vad.enums.Operation.{ALL, Operation}
 
 class Account(private val transactionStorage: TransactionStorage, private val statePrinter: StatePrinter) {
   require(transactionStorage != null, "TransactionStorage cannot be null in Account")

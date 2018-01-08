@@ -4,8 +4,7 @@ import java.time.LocalDate
 
 import bakaev.vad.Amount.{NegativeAmount, PositiveAmount}
 import bakaev.vad.Transaction.{Credit, Debit}
-import bakaev.vad.enums.Operation.ALL
-import bakaev.vad.{Account, StatePrinter, TransactionStorage}
+import bakaev.vad.{ALL, Account, StatePrinter, TransactionStorage}
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}

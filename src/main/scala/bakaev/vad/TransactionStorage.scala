@@ -4,7 +4,6 @@ import java.time.LocalDate
 import java.util.Objects
 
 import bakaev.vad.Amount.PositiveAmount
-import bakaev.vad.enums.Operation.Operation
 
 class TransactionStorage private (private val sortedTransactions: Seq[Transaction]) {
   require(sortedTransactions != null, "SortedTransactions cannot be null in StateImpl")

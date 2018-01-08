@@ -4,7 +4,6 @@ import java.time.LocalDate
 import java.util.Objects
 
 import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
-import bakaev.vad.enums.Operation._
 
 trait State {
   def printMatchedOn(from: LocalDate, to: LocalDate, toPrint: Operation, printer: StatePrinter): Unit

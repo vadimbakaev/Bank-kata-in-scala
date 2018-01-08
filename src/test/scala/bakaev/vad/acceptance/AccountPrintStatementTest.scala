@@ -5,7 +5,6 @@ import java.time.LocalDate
 
 import bakaev.vad.Amount.PositiveAmount
 import bakaev.vad._
-import bakaev.vad.enums.Operation._
 import org.mockito.Mockito
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}

@@ -7,7 +7,6 @@ import java.util.Objects
 
 import bakaev.vad.Amount.{NegativeAmount, NotZeroAmount, PositiveAmount}
 import bakaev.vad.StatePrinter._
-import bakaev.vad.enums.Operation.Operation
 
 class StatePrinter(private val printStream: PrintStream) {
   require(printStream != null, "PrintStream cannot be null in StatePrinter")

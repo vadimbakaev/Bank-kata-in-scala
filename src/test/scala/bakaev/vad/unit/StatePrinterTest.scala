@@ -5,7 +5,6 @@ import java.time.LocalDate
 
 import bakaev.vad.Amount.PositiveAmount
 import bakaev.vad._
-import bakaev.vad.enums.Operation.ALL
 import org.mockito.Mockito
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
