@@ -3,7 +3,8 @@ package bakaev.vad.acceptance
 import java.io.PrintStream
 import java.time.LocalDate
 
-import bakaev.vad.printers.StatesPrinter
+import bakaev.vad.domain.{Account, PositiveAmount, TransactionStorage}
+import bakaev.vad.domain.printers.StatesPrinter
 import bakaev.vad.{BaseSpec, _}
 import org.mockito.Mockito
 

@@ -1,14 +1,18 @@
-package bakaev.vad
+package bakaev.vad.domain
 
 import java.time.LocalDate
 import java.util.Objects
 
-import bakaev.vad.filters.{DateFilter, OperationFilter}
-import bakaev.vad.printers.StatesPrinter
+import bakaev.vad.domain.filters.{DateFilter, OperationFilter}
+import bakaev.vad.domain.printers.StatesPrinter
+import bakaev.vad.{ALL, Operation}
 
-class Account(private val transactionStorage: TransactionStorage, private val statePrinter: StatesPrinter) {
+class Account(
+    private val transactionStorage: TransactionStorage = TransactionStorage(),
+    private val statePrinter: StatesPrinter = new StatesPrinter(System.out)
+) {
   require(transactionStorage != null, "TransactionStorage cannot be null in Account")
-  require(statePrinter != null, "StatePrinter cannot be null in Account")
+  require(statePrinter != null, "StatesPrinter cannot be null in Account")
 
   def deposit(amount: PositiveAmount, date: LocalDate): Account = {
     require(amount != null, "Amount cannot be null in deposit")
@@ -30,11 +34,13 @@ class Account(private val transactionStorage: TransactionStorage, private val st
     (this.withdraw(amount, date), receiver.deposit(amount, date))
   }
 
-  def printStatement(from: LocalDate = LocalDate.MIN, to: LocalDate = LocalDate.MAX, toPrint: Operation = ALL): Unit = {
-    require(from != null, "From cannot be null in printStatement")
-    require(to != null, "To cannot be null in printStatement")
-    require(toPrint != null, "ToPrint cannot be null in printStatement")
-    transactionStorage.printStatements(new DateFilter(from, to), new OperationFilter(toPrint), statePrinter)
+  def printStatement(after: LocalDate = LocalDate.MIN,
+                     before: LocalDate = LocalDate.MAX,
+                     canPrint: Operation = ALL): Unit = {
+    require(after != null, "After cannot be null in printStatement")
+    require(before != null, "Before cannot be null in printStatement")
+    require(canPrint != null, "CanPrint cannot be null in printStatement")
+    transactionStorage.printStatements(new DateFilter(after, before), new OperationFilter(canPrint), statePrinter)
   }
 
   override def equals(obj: scala.Any): Boolean = obj match {

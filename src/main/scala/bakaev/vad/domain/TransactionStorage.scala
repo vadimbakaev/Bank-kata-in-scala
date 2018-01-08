@@ -1,10 +1,10 @@
-package bakaev.vad
+package bakaev.vad.domain
 
 import java.time.LocalDate
 import java.util.Objects
 import java.util.function.Predicate
 
-import bakaev.vad.printers.StatesPrinter
+import bakaev.vad.domain.printers.StatesPrinter
 
 class TransactionStorage private (private val sortedTransactions: Seq[Transaction]) {
   require(sortedTransactions != null, "SortedTransactions cannot be null in TransactionStorage")

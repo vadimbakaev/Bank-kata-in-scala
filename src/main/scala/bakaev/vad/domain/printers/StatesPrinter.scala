@@ -1,4 +1,4 @@
-package bakaev.vad.printers
+package bakaev.vad.domain.printers
 
 import java.io.PrintStream
 import java.time.LocalDate
@@ -7,8 +7,9 @@ import java.util.Objects
 import java.util.function.Predicate
 
 import bakaev.vad._
-import bakaev.vad.printers.StatesPrinter._
-import bakaev.vad.states.State
+import bakaev.vad.domain.{Amount, NegativeAmount, NotZeroAmount, PositiveAmount}
+import bakaev.vad.domain.printers.StatesPrinter._
+import bakaev.vad.domain.states.State
 
 class StatesPrinter(private val printStream: PrintStream) extends StateLinePrinterProducer {
   require(printStream != null, "PrintStream cannot be null in StatesPrinter")

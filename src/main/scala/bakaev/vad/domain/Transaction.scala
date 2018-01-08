@@ -1,9 +1,9 @@
-package bakaev.vad
+package bakaev.vad.domain
 
 import java.time.LocalDate
 import java.util.Objects
 
-import bakaev.vad.states.{DefaultState, State}
+import bakaev.vad.domain.states.{DefaultState, State}
 
 sealed trait Transaction extends Ordered[Transaction] {
 

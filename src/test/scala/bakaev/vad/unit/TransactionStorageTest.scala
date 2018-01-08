@@ -3,8 +3,9 @@ package bakaev.vad.unit
 import java.time.LocalDate
 
 import bakaev.vad._
-import bakaev.vad.filters.{DateFilter, OperationFilter}
-import bakaev.vad.printers.StatesPrinter
+import bakaev.vad.domain.TransactionStorage
+import bakaev.vad.domain.filters.{DateFilter, OperationFilter}
+import bakaev.vad.domain.printers.StatesPrinter
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}

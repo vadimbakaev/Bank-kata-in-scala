@@ -3,6 +3,7 @@ package bakaev.vad.unit
 import java.time.LocalDate
 
 import bakaev.vad._
+import bakaev.vad.domain.{NotZeroAmount, PositiveAmount, Transaction, TransactionStorage}
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito._
 

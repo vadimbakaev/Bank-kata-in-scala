@@ -2,10 +2,11 @@ package bakaev.vad.unit
 
 import java.time.LocalDate
 
-import bakaev.vad.Transaction.{Credit, Debit}
 import bakaev.vad._
-import bakaev.vad.filters.{DateFilter, OperationFilter}
-import bakaev.vad.printers.StatesPrinter
+import bakaev.vad.domain.Transaction.{Credit, Debit}
+import bakaev.vad.domain.{Account, NegativeAmount, PositiveAmount, TransactionStorage}
+import bakaev.vad.domain.filters.{DateFilter, OperationFilter}
+import bakaev.vad.domain.printers.StatesPrinter
 import org.mockito.Mockito._
 
 class AccountTest extends BaseSpec {

@@ -4,8 +4,8 @@ import java.io.PrintStream
 import java.time.LocalDate
 
 import bakaev.vad._
-import bakaev.vad.filters.{DateFilter, OperationFilter}
-import bakaev.vad.printers.StatesPrinter
+import bakaev.vad.domain.filters.{DateFilter, OperationFilter}
+import bakaev.vad.domain.printers.StatesPrinter
 import org.mockito.Mockito._
 
 class StatesPrinterTest extends BaseSpec {

@@ -1,9 +1,10 @@
-package bakaev.vad.filters
+package bakaev.vad.domain.filters
 
 import java.util.Objects
 import java.util.function.Predicate
 
 import bakaev.vad._
+import bakaev.vad.domain.{NegativeAmount, NotZeroAmount, PositiveAmount}
 
 class OperationFilter(private val printPermission: Operation) extends Predicate[NotZeroAmount] {
   override def test(operation: NotZeroAmount): Boolean = (printPermission, operation) match {

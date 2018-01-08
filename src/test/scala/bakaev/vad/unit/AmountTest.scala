@@ -1,6 +1,7 @@
 package bakaev.vad.unit
 
-import bakaev.vad.{Amount, BaseSpec, NotZeroAmount, ZeroAmount}
+import bakaev.vad.domain.{Amount, NotZeroAmount, ZeroAmount}
+import bakaev.vad.BaseSpec
 
 class AmountTest extends BaseSpec {
 

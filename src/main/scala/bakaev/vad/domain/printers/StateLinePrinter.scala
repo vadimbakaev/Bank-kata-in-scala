@@ -1,9 +1,9 @@
-package bakaev.vad.printers
+package bakaev.vad.domain.printers
 
 import java.time.LocalDate
 import java.util.function.Predicate
 
-import bakaev.vad.{Amount, NotZeroAmount}
+import bakaev.vad.domain.{Amount, NotZeroAmount}
 
 trait StateLinePrinter {
   def print(date: LocalDate, debit: NotZeroAmount, balance: Amount): Unit

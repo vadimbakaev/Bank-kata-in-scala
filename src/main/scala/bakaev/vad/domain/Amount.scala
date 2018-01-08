@@ -1,4 +1,4 @@
-package bakaev.vad
+package bakaev.vad.domain
 
 import java.util.Objects
 

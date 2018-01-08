@@ -1,10 +1,10 @@
-package bakaev.vad.states
+package bakaev.vad.domain.states
 
 import java.time.LocalDate
 import java.util.Objects
 
-import bakaev.vad.printers.StateLinePrinter
-import bakaev.vad.{Amount, NotZeroAmount}
+import bakaev.vad.domain.printers.StateLinePrinter
+import bakaev.vad.domain.{Amount, NotZeroAmount}
 
 class DefaultState(
     private val operationDate: LocalDate,

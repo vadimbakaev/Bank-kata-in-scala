@@ -1,4 +1,4 @@
-package bakaev.vad.filters
+package bakaev.vad.domain.filters
 
 import java.time.LocalDate
 import java.util.Objects

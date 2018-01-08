@@ -50,6 +50,11 @@ date       || credit   || debit    || balance
 #### How to run:
 
 ```
-# run coverage and generate report
+# to run Application
+sbt run
+```
+
+```
+# to test and generate coverage report
 sbt clean coverage test coverageReport
 ```
