@@ -98,6 +98,22 @@ class AccountTest extends FlatSpec with Matchers with MockitoSugar {
     } should have message "requirement failed: Receiver cannot be sender in transfer"
   }
 
+  it should "execute transfer if sender and reciever are equals" in {
+    val statePrinter = mock[StatePrinter]
+    val fstAccountState = mock[TransactionStorage]
+
+    val fstAccount = new Account(fstAccountState, statePrinter)
+    val sndAccount = new Account(fstAccountState, statePrinter)
+
+    when(fstAccountState.withdraw(new PositiveAmount(100), LocalDate.MIN)).thenReturn(TransactionStorage())
+    when(fstAccountState.deposit(new PositiveAmount(100), LocalDate.MIN)).thenReturn(TransactionStorage())
+
+    fstAccount.transfer(new PositiveAmount(100), LocalDate.MIN, sndAccount)
+
+    verify(fstAccountState).withdraw(new PositiveAmount(100), LocalDate.MIN)
+    verify(fstAccountState).deposit(new PositiveAmount(100), LocalDate.MIN)
+  }
+
   it should "printStatement between two dates" in {
     val state = mock[TransactionStorage]
     val statePrinter = mock[StatePrinter]

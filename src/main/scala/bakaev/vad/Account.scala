@@ -23,7 +23,7 @@ class Account(private val transactionStorage: TransactionStorage, private val st
 
   def transfer(amount: PositiveAmount, date: LocalDate, receiver: Account): (Account, Account) = {
     require(receiver != null, "Receiver cannot be null in transfer")
-    require(receiver != this, "Receiver cannot be sender in transfer")
+    require(receiver ne this, "Receiver cannot be sender in transfer")
     require(amount != null, "Amount cannot be null in transfer")
     require(date != null, "Date cannot be null in transfer")
     (this.withdraw(amount, date), receiver.deposit(amount, date))
