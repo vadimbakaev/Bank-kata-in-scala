@@ -7,7 +7,7 @@ class TransactionStorage private (private val sortedTransactions: Seq[Transactio
   require(sortedTransactions != null, "SortedTransactions cannot be null in StateImpl")
 
   private lazy val chainOfStates = sortedTransactions.indices
-    .map(index => sortedTransactions(index) toState (sortedTransactions take index))
+    .map(index => sortedTransactions(index) toStateLine (sortedTransactions take index))
     .reverse
 
   def deposit(amount: PositiveAmount, date: LocalDate): TransactionStorage =

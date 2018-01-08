@@ -7,7 +7,7 @@ import bakaev.vad._
 import org.mockito.Mockito
 import org.mockito.Mockito._
 
-class StatePrinterTest extends BaseSpec {
+class StateLinePrinterTest extends BaseSpec {
 
   "A StatePrinter" should "print only header for empty list" in {
     val printStream = mock[PrintStream]
@@ -25,9 +25,9 @@ class StatePrinterTest extends BaseSpec {
     val printStream = mock[PrintStream]
     val printer = new StatePrinter(printStream)
 
-    val state1 = mock[State]
-    val state2 = mock[State]
-    val state3 = mock[State]
+    val state1 = mock[StateLine]
+    val state2 = mock[StateLine]
+    val state3 = mock[StateLine]
 
     val states = Seq(state1, state2, state3)
 
