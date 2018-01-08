@@ -2,6 +2,9 @@ package bakaev.vad
 
 import java.time.LocalDate
 import java.util.Objects
+import java.util.function.Predicate
+
+import bakaev.vad.printers.StatesPrinter
 
 class TransactionStorage private (private val sortedTransactions: Seq[Transaction]) {
   require(sortedTransactions != null, "SortedTransactions cannot be null in StateImpl")
@@ -16,8 +19,10 @@ class TransactionStorage private (private val sortedTransactions: Seq[Transactio
   def withdraw(amount: PositiveAmount, date: LocalDate): TransactionStorage =
     TransactionStorage(sortedTransactions :+ Transaction(-amount, date))
 
-  def printStatements(from: LocalDate, to: LocalDate, toPrint: Operation, printer: StatePrinter): Unit =
-    printer print (from, to, toPrint, chainOfStates)
+  def printStatements(dateFilter: Predicate[LocalDate],
+                      operationFilter: Predicate[NotZeroAmount],
+                      printer: StatesPrinter): Unit =
+    printer printWithFilters (dateFilter, operationFilter, chainOfStates)
 
   override def equals(obj: scala.Any): Boolean = obj match {
     case that: TransactionStorage => sortedTransactions == that.sortedTransactions

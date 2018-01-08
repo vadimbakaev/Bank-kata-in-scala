@@ -3,7 +3,10 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
-class Account(private val transactionStorage: TransactionStorage, private val statePrinter: StatePrinter) {
+import bakaev.vad.filters.{DateFilter, OperationFilter}
+import bakaev.vad.printers.StatesPrinter
+
+class Account(private val transactionStorage: TransactionStorage, private val statePrinter: StatesPrinter) {
   require(transactionStorage != null, "TransactionStorage cannot be null in Account")
   require(statePrinter != null, "StatePrinter cannot be null in Account")
 
@@ -31,7 +34,7 @@ class Account(private val transactionStorage: TransactionStorage, private val st
     require(from != null, "From cannot be null in printStatement")
     require(to != null, "To cannot be null in printStatement")
     require(toPrint != null, "ToPrint cannot be null in printStatement")
-    transactionStorage.printStatements(from, to, toPrint, statePrinter)
+    transactionStorage.printStatements(new DateFilter(from, to), new OperationFilter(toPrint), statePrinter)
   }
 
   override def equals(obj: scala.Any): Boolean = obj match {

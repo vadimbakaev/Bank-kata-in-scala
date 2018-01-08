@@ -3,13 +3,19 @@ package bakaev.vad
 import java.time.LocalDate
 import java.util.Objects
 
+import bakaev.vad.states.{DefaultState, State}
+
 sealed trait Transaction extends Ordered[Transaction] {
 
   protected val value: NotZeroAmount
   protected val date: LocalDate
 
-  def toStateLine(previousTransactions: Seq[Transaction]): StateLine =
-    StateLine(date, value, (previousTransactions map (transaction => transaction.value)).fold(value: Amount)(_ + _))
+  def toStateLine(previousTransactions: Seq[Transaction]): State =
+    DefaultState(
+      date,
+      value,
+      (previousTransactions map (transaction => transaction.value)).fold(value: Amount)(_ + _)
+    )
 
   override def compare(that: Transaction): Int = date compareTo that.date
 

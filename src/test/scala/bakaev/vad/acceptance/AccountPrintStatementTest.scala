@@ -3,6 +3,7 @@ package bakaev.vad.acceptance
 import java.io.PrintStream
 import java.time.LocalDate
 
+import bakaev.vad.printers.StatesPrinter
 import bakaev.vad.{BaseSpec, _}
 import org.mockito.Mockito
 
@@ -12,7 +13,7 @@ class AccountPrintStatementTest extends BaseSpec {
 
     val printStream = mock[PrintStream]
 
-    val account = new Account(TransactionStorage(), new StatePrinter(printStream))
+    val account = new Account(TransactionStorage(), new StatesPrinter(printStream))
       .deposit(new PositiveAmount(1001), LocalDate.of(2012, 1, 1))
       .withdraw(new PositiveAmount(1000), LocalDate.of(2012, 1, 2))
       .deposit(new PositiveAmount(1000), LocalDate.of(2012, 1, 10))
@@ -34,7 +35,7 @@ class AccountPrintStatementTest extends BaseSpec {
 
     val printStream = mock[PrintStream]
 
-    val account = new Account(TransactionStorage(), new StatePrinter(printStream))
+    val account = new Account(TransactionStorage(), new StatesPrinter(printStream))
       .deposit(new PositiveAmount(1001), LocalDate.of(2012, 1, 1))
       .withdraw(new PositiveAmount(1000), LocalDate.of(2012, 1, 2))
       .deposit(new PositiveAmount(1000), LocalDate.of(2012, 1, 10))
