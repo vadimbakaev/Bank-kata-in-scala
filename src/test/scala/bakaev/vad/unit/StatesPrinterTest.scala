@@ -22,4 +22,10 @@ class StatesPrinterTest extends BaseSpec {
     verify(printStream).println("date       || credit   || debit    || balance")
   }
 
+  it should "throw an exception if printStream is null" in {
+    the[IllegalArgumentException] thrownBy {
+      new StatesPrinter(null)
+    } should have message "requirement failed: PrintStream cannot be null in StatesPrinter"
+  }
+
 }

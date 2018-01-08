@@ -14,7 +14,7 @@ sealed trait Transaction extends Ordered[Transaction] {
     DefaultState(
       date,
       value,
-      (previousTransactions map (transaction => transaction.value)).fold(value: Amount)(_ + _)
+      (previousTransactions map (transaction => transaction.value) fold (value: Amount))(_ + _)
     )
 
   override def compare(that: Transaction): Int = date compareTo that.date
@@ -24,7 +24,7 @@ sealed trait Transaction extends Ordered[Transaction] {
     case _                 => false
   }
 
-  override def hashCode: Int = Objects.hashCode(date, value)
+  override def hashCode: Int = Objects.hash(date, value)
 }
 
 object Transaction {

@@ -6,10 +6,9 @@ import java.time.format.DateTimeFormatter
 import java.util.Objects
 import java.util.function.Predicate
 
-import bakaev.vad._
-import bakaev.vad.domain.{Amount, NegativeAmount, NotZeroAmount, PositiveAmount}
 import bakaev.vad.domain.printers.StatesPrinter._
 import bakaev.vad.domain.states.State
+import bakaev.vad.domain.{Amount, NegativeAmount, NotZeroAmount, PositiveAmount}
 
 class StatesPrinter(private val printStream: PrintStream) extends StateLinePrinterProducer {
   require(printStream != null, "PrintStream cannot be null in StatesPrinter")
@@ -24,7 +23,7 @@ class StatesPrinter(private val printStream: PrintStream) extends StateLinePrint
   override def stateLinePrinter(dateFilter: Predicate[LocalDate],
                                 operationFilter: Predicate[NotZeroAmount]): StateLinePrinter =
     (date: LocalDate, operation: NotZeroAmount, balance: Amount) => {
-      if (dateFilter.test(date) && operationFilter.test(operation)) printLine(date, operation, balance)
+      if ((dateFilter test date) && (operationFilter test operation)) printLine(date, operation, balance)
     }
 
   private def operationsBlock(operation: NotZeroAmount): String = operation match {
@@ -43,7 +42,7 @@ class StatesPrinter(private val printStream: PrintStream) extends StateLinePrint
     case _                   => false
   }
 
-  override def hashCode: Int = Objects.hashCode(printStream)
+  override def hashCode: Int = Objects.hash(printStream)
 }
 
 object StatesPrinter {

@@ -13,7 +13,6 @@ class Account(
 ) {
   require(transactionStorage != null, "TransactionStorage cannot be null in Account")
   require(statePrinter != null, "StatesPrinter cannot be null in Account")
-
   def deposit(amount: PositiveAmount, date: LocalDate): Account = {
     require(amount != null, "Amount cannot be null in deposit")
     require(date != null, "Date cannot be null in deposit")
@@ -48,5 +47,5 @@ class Account(
     case _             => false
   }
 
-  override def hashCode: Int = Objects.hashCode(transactionStorage, statePrinter)
+  override def hashCode: Int = Objects.hash(transactionStorage, statePrinter)
 }

@@ -19,5 +19,5 @@ class OperationFilter(private val printPermission: Operation) extends Predicate[
     case _                     => false
   }
 
-  override def hashCode: Int = Objects.hashCode(printPermission)
+  override def hashCode: Int = Objects.hash(printPermission)
 }

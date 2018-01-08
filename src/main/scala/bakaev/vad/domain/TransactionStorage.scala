@@ -7,8 +7,6 @@ import java.util.function.Predicate
 import bakaev.vad.domain.printers.StatesPrinter
 
 class TransactionStorage private (private val sortedTransactions: Seq[Transaction]) {
-  require(sortedTransactions != null, "SortedTransactions cannot be null in TransactionStorage")
-
   private lazy val chainOfStates = sortedTransactions.indices
     .map(index => sortedTransactions(index) toStateLine (sortedTransactions take index))
     .reverse
@@ -29,7 +27,7 @@ class TransactionStorage private (private val sortedTransactions: Seq[Transactio
     case _                        => false
   }
 
-  override def hashCode: Int = Objects.hashCode(sortedTransactions)
+  override def hashCode: Int = Objects.hash(sortedTransactions)
 }
 
 object TransactionStorage {

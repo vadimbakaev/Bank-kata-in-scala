@@ -19,11 +19,12 @@ class DefaultState(
   override def printOn(printer: StateLinePrinter): Unit = printer print (operationDate, operation, balance)
 
   override def equals(obj: scala.Any): Boolean = obj match {
-    case that: DefaultState => operationDate == that.operationDate && operation == that.operation
-    case _                  => false
+    case that: DefaultState =>
+      operationDate == that.operationDate && operation == that.operation && balance == that.balance
+    case _ => false
   }
 
-  override def hashCode: Int = Objects.hashCode(operationDate, operation)
+  override def hashCode: Int = Objects.hash(operationDate, operation, balance)
 }
 
 object DefaultState {

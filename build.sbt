@@ -12,4 +12,8 @@ libraryDependencies ++= Seq(
 scalafmtOnCompile := true
 coverageEnabled := true
 
-coverageExcludedPackages := "hashCode;"
+coverageExcludedPackages :=
+  """
+    |<empty>;
+    |.*Application.*;
+    |""".stripMargin

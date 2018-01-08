@@ -1,6 +1,6 @@
 package bakaev.vad.unit
 
-import bakaev.vad.domain.{Amount, NotZeroAmount, ZeroAmount}
+import bakaev.vad.domain._
 import bakaev.vad.BaseSpec
 
 class AmountTest extends BaseSpec {
@@ -57,5 +57,13 @@ class AmountTest extends BaseSpec {
     the[IllegalArgumentException] thrownBy {
       NotZeroAmount(0)
     } should have message "requirement failed: NotZeroAmount can't be zero"
+  }
+
+  "A NegativeAmount" should "on minus return PositiveAmount" in {
+    -new NegativeAmount(-7) should equal(new PositiveAmount(7))
+  }
+
+  "A PositiveAmount" should "on minus return NegativeAmount" in {
+    -new PositiveAmount(77) should equal(new NegativeAmount(-77))
   }
 }
