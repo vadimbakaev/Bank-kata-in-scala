@@ -10,3 +10,6 @@ libraryDependencies ++= Seq(
 )
 
 scalafmtOnCompile := true
+coverageEnabled := true
+
+coverageExcludedPackages := "hashCode;"

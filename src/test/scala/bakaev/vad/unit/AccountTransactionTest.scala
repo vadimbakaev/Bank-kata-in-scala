@@ -30,7 +30,8 @@ class AccountTransactionTest extends BaseSpec {
     val transactions = mock[Seq[Transaction]]
 
     when(transactions.sorted(ArgumentMatchers.any())).thenReturn(transactions)
-    when(transactions :+ Transaction(NotZeroAmount(10), LocalDate.MIN)).thenReturn(Seq(Transaction(NotZeroAmount(10), LocalDate.MIN)))
+    when(transactions :+ Transaction(NotZeroAmount(10), LocalDate.MIN))
+      .thenReturn(Seq(Transaction(NotZeroAmount(10), LocalDate.MIN)))
 
     val state = TransactionStorage(transactions)
 
@@ -54,7 +55,8 @@ class AccountTransactionTest extends BaseSpec {
     val seq = mock[Seq[Transaction]]
 
     when(seq.sorted(ArgumentMatchers.any())).thenReturn(seq)
-    when(seq :+ Transaction(NotZeroAmount(-1000), LocalDate.MIN)).thenReturn(Seq(Transaction(NotZeroAmount(-1000), LocalDate.MIN)))
+    when(seq :+ Transaction(NotZeroAmount(-1000), LocalDate.MIN))
+      .thenReturn(Seq(Transaction(NotZeroAmount(-1000), LocalDate.MIN)))
 
     val state = TransactionStorage(seq)
 
@@ -66,8 +68,6 @@ class AccountTransactionTest extends BaseSpec {
     verify(seq) :+ Transaction(NotZeroAmount(-1000), LocalDate.MIN)
   }
 
-  it should "printStatement filtered by date and type" in {
-
-  }
+  it should "printStatement filtered by date and type" in {}
 
 }

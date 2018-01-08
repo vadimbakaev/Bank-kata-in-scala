@@ -11,7 +11,7 @@ import org.mockito.Mockito._
 class AccountTest extends BaseSpec {
 
   "An account" should "store deposit on state" in {
-    val state = mock[TransactionStorage]
+    val state        = mock[TransactionStorage]
     val statePrinter = mock[StatesPrinter]
 
     val account = new Account(state, statePrinter)
@@ -24,7 +24,7 @@ class AccountTest extends BaseSpec {
   }
 
   it should "store deposit on state and return new account" in {
-    val state = mock[TransactionStorage]
+    val state        = mock[TransactionStorage]
     val statePrinter = mock[StatesPrinter]
 
     val account = new Account(state, statePrinter)
@@ -34,7 +34,7 @@ class AccountTest extends BaseSpec {
   }
 
   it should "store withdraw on state" in {
-    val state = mock[TransactionStorage]
+    val state        = mock[TransactionStorage]
     val statePrinter = mock[StatesPrinter]
 
     val account = new Account(state, statePrinter)
@@ -46,7 +46,7 @@ class AccountTest extends BaseSpec {
   }
 
   it should "store withdraw on state and return new account" in {
-    val state = mock[TransactionStorage]
+    val state        = mock[TransactionStorage]
     val statePrinter = mock[StatesPrinter]
 
     val account = new Account(state, statePrinter)
@@ -56,7 +56,7 @@ class AccountTest extends BaseSpec {
   }
 
   it should "transfer amount to an account, return accounts updated with transactions" in {
-    val statePrinter = mock[StatesPrinter]
+    val statePrinter    = mock[StatesPrinter]
     val fstAccountState = mock[TransactionStorage]
     val sndAccountState = mock[TransactionStorage]
 
@@ -71,12 +71,12 @@ class AccountTest extends BaseSpec {
 
     val (fstUpdatedAccount, sndUpdatedAccount) = fstAccount.transfer(new PositiveAmount(100), LocalDate.MIN, sndAccount)
 
-    fstUpdatedAccount should equal (new Account(fstUpdatedTransactionStorage, statePrinter))
-    sndUpdatedAccount should equal (new Account(sndUpdatedTransactionStorage, statePrinter))
+    fstUpdatedAccount should equal(new Account(fstUpdatedTransactionStorage, statePrinter))
+    sndUpdatedAccount should equal(new Account(sndUpdatedTransactionStorage, statePrinter))
   }
 
   it should "throw an exception if receiver is null" in {
-    val statePrinter = mock[StatesPrinter]
+    val statePrinter    = mock[StatesPrinter]
     val fstAccountState = mock[TransactionStorage]
 
     val fstAccount = new Account(fstAccountState, statePrinter)
@@ -87,7 +87,7 @@ class AccountTest extends BaseSpec {
   }
 
   it should "throw an exception if sender is receiver" in {
-    val statePrinter = mock[StatesPrinter]
+    val statePrinter    = mock[StatesPrinter]
     val fstAccountState = mock[TransactionStorage]
 
     val fstAccount = new Account(fstAccountState, statePrinter)
@@ -98,7 +98,7 @@ class AccountTest extends BaseSpec {
   }
 
   it should "execute transfer if sender and reciever are equals" in {
-    val statePrinter = mock[StatesPrinter]
+    val statePrinter    = mock[StatesPrinter]
     val fstAccountState = mock[TransactionStorage]
 
     val fstAccount = new Account(fstAccountState, statePrinter)
@@ -114,12 +114,12 @@ class AccountTest extends BaseSpec {
   }
 
   it should "printStatement between two dates" in {
-    val state = mock[TransactionStorage]
+    val state        = mock[TransactionStorage]
     val statePrinter = mock[StatesPrinter]
 
     val account = new Account(state, statePrinter)
-    val from = LocalDate.MIN
-    val to = LocalDate.MAX
+    val from    = LocalDate.MIN
+    val to      = LocalDate.MAX
 
     account.printStatement(from, to, ALL)
 

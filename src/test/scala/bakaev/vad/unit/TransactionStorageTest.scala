@@ -15,10 +15,10 @@ class TransactionStorageTest extends FlatSpec with Matchers with MockitoSugar {
     val printer = mock[StatesPrinter]
 
     val storage = TransactionStorage()
-    val from = LocalDate.MIN
-    val to = LocalDate.MAX
+    val from    = LocalDate.MIN
+    val to      = LocalDate.MAX
 
-    val dateFilter = new DateFilter(from, to)
+    val dateFilter      = new DateFilter(from, to)
     val operationFilter = new OperationFilter(ALL)
 
     doNothing().when(printer).printWithFilters(dateFilter, operationFilter, Nil)

@@ -11,7 +11,7 @@ import bakaev.vad.printers.StatesPrinter._
 import bakaev.vad.states.State
 
 class StatesPrinter(private val printStream: PrintStream) extends StateLinePrinterProducer {
-  require(printStream != null, "PrintStream cannot be null in StatePrinter")
+  require(printStream != null, "PrintStream cannot be null in StatesPrinter")
   def printWithFilters(dateFilter: Predicate[LocalDate],
                        operationFilter: Predicate[NotZeroAmount],
                        states: Seq[State]): Unit = {

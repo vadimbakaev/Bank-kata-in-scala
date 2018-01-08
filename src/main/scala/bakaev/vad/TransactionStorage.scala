@@ -7,7 +7,7 @@ import java.util.function.Predicate
 import bakaev.vad.printers.StatesPrinter
 
 class TransactionStorage private (private val sortedTransactions: Seq[Transaction]) {
-  require(sortedTransactions != null, "SortedTransactions cannot be null in StateImpl")
+  require(sortedTransactions != null, "SortedTransactions cannot be null in TransactionStorage")
 
   private lazy val chainOfStates = sortedTransactions.indices
     .map(index => sortedTransactions(index) toStateLine (sortedTransactions take index))
