@@ -3,13 +3,13 @@ package bakaev.vad.unit
 import java.time.LocalDate
 
 import bakaev.vad.Amount.{NotZeroAmount, PositiveAmount}
-import bakaev.vad.{Transaction, TransactionStorage}
+import bakaev.vad.{BaseSpec, Transaction, TransactionStorage}
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
 
-class AccountTransactionTest extends FlatSpec with Matchers with MockitoSugar {
+class AccountTransactionTest extends BaseSpec {
 
   "An TransactionStorage" should "return new account on deposit" in {
     val state = TransactionStorage()

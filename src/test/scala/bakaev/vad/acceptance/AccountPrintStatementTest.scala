@@ -4,12 +4,10 @@ import java.io.PrintStream
 import java.time.LocalDate
 
 import bakaev.vad.Amount.PositiveAmount
-import bakaev.vad._
+import bakaev.vad.{BaseSpec, _}
 import org.mockito.Mockito
-import org.scalatest.mockito.MockitoSugar
-import org.scalatest.{FlatSpec, Matchers}
 
-class AccountPrintStatementTest extends FlatSpec with Matchers with MockitoSugar {
+class AccountPrintStatementTest extends BaseSpec {
 
   "An account" should "print statement correctly" in {
 

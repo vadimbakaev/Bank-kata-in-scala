@@ -1,11 +1,11 @@
 package bakaev.vad.unit
 
-import bakaev.vad.Amount
+import bakaev.vad.{Amount, BaseSpec}
 import bakaev.vad.Amount.{NotZeroAmount, ZeroAmount}
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{FlatSpec, Matchers}
 
-class AmountTest extends FlatSpec with Matchers with MockitoSugar {
+class AmountTest extends BaseSpec {
 
   "An amount" should "be equal to itself" in {
     val amount = Amount(100)

@@ -7,10 +7,8 @@ import bakaev.vad.Amount.PositiveAmount
 import bakaev.vad._
 import org.mockito.Mockito
 import org.mockito.Mockito._
-import org.scalatest.mockito.MockitoSugar
-import org.scalatest.{FlatSpec, Matchers}
 
-class StatePrinterTest extends FlatSpec with Matchers with MockitoSugar {
+class StatePrinterTest extends BaseSpec {
 
   "A StatePrinter" should "print only header for empty list" in {
     val printStream = mock[PrintStream]
