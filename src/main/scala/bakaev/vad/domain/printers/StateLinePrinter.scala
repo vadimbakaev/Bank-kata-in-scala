@@ -6,7 +6,7 @@ import java.util.function.Predicate
 import bakaev.vad.domain.{Amount, NotZeroAmount}
 
 trait StateLinePrinter {
-  def print(date: LocalDate, debit: NotZeroAmount, balance: Amount): Unit
+  def print(date: LocalDate, operation: NotZeroAmount, balance: Amount): Unit
 }
 
 trait StateLinePrinterProducer {
